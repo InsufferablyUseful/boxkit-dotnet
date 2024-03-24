@@ -22,8 +22,9 @@ jobs:
         uses: akeyless-community/akeyless-github-action@v1.0.1
         id: fetch-secrets
         with:
-          access-id: ${{ secrets.AKEYLESS_ACCESS_ID }}
-          access-type: jwt
+          access-id: ${{ secrets.AKEYLESS_ID }}
+          access-type: access_key
+          access-key: ${{ secrets.AKEYLESS_API }}
           static-secrets: |
             - name: "/secret/path/MyFirstSecret"
               output-name: "my_first_secret"
