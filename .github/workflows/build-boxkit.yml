@@ -12,7 +12,7 @@ on:
       - '**/README.md'
   workflow_dispatch:
 env:
-    IMAGE_NAME: boxkit
+    IMAGE_NAME: boxkit-dotnet
     IMAGE_TAGS: latest
     IMAGE_REGISTRY: ghcr.io/${{ github.repository_owner }}
 
@@ -27,6 +27,13 @@ jobs:
     strategy:
       fail-fast: false
     steps: 
+      # Login so we can pull the base image from GHCR?
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.ITS_A_SECRET }}
       # Checkout push-to-registry action GitHub repository
       - name: Checkout Push to Registry action
         uses: actions/checkout@v4
@@ -60,6 +67,13 @@ jobs:
         uses: ASzc/change-string-case-action@v6
         with:
           string: ${{ env.IMAGE_REGISTRY }}
+      #Log in as me to get it to push to my repo? Really?
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       # Push the image to GHCR (Image Registry)
       - name: Push To GHCR
@@ -76,13 +90,6 @@ jobs:
           password: ${{ env.REGISTRY_PASSWORD }}
           extra-args: |
             --disable-content-trust
-            
-      - name: Login to GitHub Container Registry
-        uses: docker/login-action@v3
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
             
       # Sign container
       - uses: sigstore/cosign-installer@v3.4.0
