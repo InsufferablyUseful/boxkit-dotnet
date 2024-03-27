@@ -6,6 +6,10 @@ LABEL com.github.containers.toolbox="true" \
       maintainer="benrobertson150@hotmail.co.uk"
 
 COPY jetbrainsPath.sh /etc/profile.d/
+COPY extra-packages /
+RUN wget https://packages.microsoft.com/config/debian/12/packages-microsoft-prod.deb -O packages-microsoft-prod.deb && \
+sudo dpkg -i packages-microsoft-prod.deb && \
+rm packages-microsoft-prod.deb
 #Update core packages
 RUN apt-get update && \
     apt-get -y upgrade && \
