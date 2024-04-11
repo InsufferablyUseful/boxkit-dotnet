@@ -15,10 +15,10 @@ RUN apt-get update && \
     apt-get -y upgrade && \
     grep -v '^#' /extra-packages | xargs apt-get -y install
 #Install Rider
-RUN mkdir /opt/Rider && \
-    wget https://download.jetbrains.com/rider/JetBrains.Rider-2023.3.3.tar.gz -O /opt/rider.tar.gz && \
-    tar -xf /opt/rider.tar.gz -C /opt/Rider &&\ 
-    rm /opt/rider.tar.gz
+RUN wget https://download.jetbrains.com/rider/JetBrains.Rider-2023.3.3.tar.gz -O /opt/rider.tar.gz && \
+    tar -xf /opt/rider.tar.gz -C /opt && \ 
+    rm /opt/rider.tar.gz && \
+    mv /opt/*JetBrains\ Rider-* /opt/Rider
 CMD /bin/bash
 #RUN   ln -fs /bin/sh /usr/bin/sh && \
 #      ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/docker && \

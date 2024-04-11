@@ -1,1 +1,1 @@
-export PATH="$PATH:/opt/Rider"
+export PATH="$PATH:/opt/Rider/bin"
