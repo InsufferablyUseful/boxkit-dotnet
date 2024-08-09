@@ -29,7 +29,7 @@ jobs:
     steps: 
       # Login so we can pull the base image from GHCR?
       - name: Login to GitHub Container Registry
-        uses: docker/login-action@v3
+        uses: docker/login-action@v3.3.0
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
