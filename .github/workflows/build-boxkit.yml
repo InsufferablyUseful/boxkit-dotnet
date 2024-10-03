@@ -27,6 +27,13 @@ jobs:
     strategy:
       fail-fast: false
     steps: 
+      #Remove uneeded packages to free up space for build
+      - name: Free Disk Space (Ubuntu)
+        uses: jlumbroso/free-disk-space@v1.3.1
+        with: # By default removes .NET runtime, Haskell runtime, large packages, Docker images and swap storage
+          # Remove image tool cache
+         tool-cache: true # optional, default is false
+          
       # Login so we can pull the base image from GHCR?
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v3.3.0
