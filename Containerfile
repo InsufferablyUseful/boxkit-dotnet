@@ -20,7 +20,7 @@ RUN wget -nv https://download.jetbrains.com/rider/JetBrains.Rider-2024.2.5.tar.g
     tar -xf /opt/rider.tar.gz -C /opt && \ 
     rm /opt/rider.tar.gz && \
     mv /opt/*JetBrains\ Rider-* /opt/Rider \
-    mv /export-rider.sh /opt/Rider/ \
+    mv /export-rider.sh /opt/Rider/ 
 
 CMD /bin/bash
 #RUN   ln -fs /bin/sh /usr/bin/sh && \
