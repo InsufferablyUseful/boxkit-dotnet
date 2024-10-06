@@ -6,8 +6,9 @@ LABEL com.github.containers.toolbox="true" \
       maintainer="benrobertson150@hotmail.co.uk"
 
 COPY jetbrainsPath.sh /etc/profile.d/
-COPY extra-packages /
-RUN wget https://packages.microsoft.com/config/debian/12/packages-microsoft-prod.deb -O packages-microsoft-prod.deb && \
+COPY extra-packages export-rider.sh /
+COPY rider.desktop /usr/share/applications/
+RUN wget -nv https://packages.microsoft.com/config/debian/12/packages-microsoft-prod.deb -O packages-microsoft-prod.deb && \
 sudo dpkg -i packages-microsoft-prod.deb && \
 rm packages-microsoft-prod.deb
 #Update core packages
@@ -15,10 +16,12 @@ RUN apt-get update && \
     apt-get -y upgrade && \
     grep -v '^#' /extra-packages | xargs apt-get -y install
 #Install Rider
-RUN wget https://download.jetbrains.com/rider/JetBrains.Rider-2024.2.5.tar.gz -O /opt/rider.tar.gz && \
+RUN wget -nv https://download.jetbrains.com/rider/JetBrains.Rider-2024.2.5.tar.gz -O /opt/rider.tar.gz && \
     tar -xf /opt/rider.tar.gz -C /opt && \ 
     rm /opt/rider.tar.gz && \
-    mv /opt/*JetBrains\ Rider-* /opt/Rider
+    mv /opt/*JetBrains\ Rider-* /opt/Rider \
+    mv /export-rider.sh /opt/Rider/ \
+
 CMD /bin/bash
 #RUN   ln -fs /bin/sh /usr/bin/sh && \
 #      ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/docker && \
