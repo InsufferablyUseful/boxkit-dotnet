@@ -31,6 +31,11 @@ jobs:
         with: # By default removes .NET runtime, Haskell runtime, large packages, Docker images and swap storage
           # Remove image tool cache
          tool-cache: true # optional, default is false
+
+      # Clone code to runner
+      - name: Checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+        
       # Build metadata
       - name: Image Metadata
         uses: docker/metadata-action@v5
