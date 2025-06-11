@@ -3,8 +3,6 @@ on:
   pull_request:
     branches:
       - main
-  schedule:
-    - cron: '0 0 * * TUE'
   push:
     branches:
       - main
@@ -19,7 +17,7 @@ env:
 jobs:
   push-ghcr:
     name: Build and push image
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     permissions:
       contents: read
       packages: write
@@ -33,18 +31,6 @@ jobs:
         with: # By default removes .NET runtime, Haskell runtime, large packages, Docker images and swap storage
           # Remove image tool cache
          tool-cache: true # optional, default is false
-          
-      # Login so we can pull the base image from GHCR?
-      - name: Login to GitHub Container Registry
-        uses: docker/login-action@v3.3.0
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.ITS_A_SECRET }}
-      # Checkout push-to-registry action GitHub repository
-      - name: Checkout Push to Registry action
-        uses: actions/checkout@v4
-        
       # Build metadata
       - name: Image Metadata
         uses: docker/metadata-action@v5
@@ -65,7 +51,7 @@ jobs:
           image: ${{ env.IMAGE_NAME }}
           tags: ${{ env.IMAGE_TAGS }}
           labels: ${{ steps.meta.outputs.labels }}
-          oci: false
+          oci: true
           
       # Workaround bug where capital letters in your GitHub username make it impossible to push to GHCR.
       # https://github.com/macbre/push-to-ghcr/issues/12
@@ -74,14 +60,7 @@ jobs:
         uses: ASzc/change-string-case-action@v6
         with:
           string: ${{ env.IMAGE_REGISTRY }}
-      #Log in as me to get it to push to my repo? Really?
-      - name: Login to GitHub Container Registry
-        uses: docker/login-action@v3
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-
+          
       # Push the image to GHCR (Image Registry)
       - name: Push To GHCR
         uses: redhat-actions/push-to-registry@v2
@@ -97,6 +76,14 @@ jobs:
           password: ${{ env.REGISTRY_PASSWORD }}
           extra-args: |
             --disable-content-trust
+
+      #Log in as me to get it to push to my repo? Really?
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
             
       # Sign container
       - uses: sigstore/cosign-installer@v3.7.0
