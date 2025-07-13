@@ -15,7 +15,7 @@ RUN apt-get update && \
     apt-get -y upgrade && \
     grep -v '^#' /extra-packages | xargs apt-get -y install
 #Install Rider
-RUN wget https://download.jetbrains.com/rider/JetBrains.Rider-2025.1.2.tar.gz -O /opt/rider.tar.gz && \
+RUN wget https://download.jetbrains.com/rider/JetBrains.Rider-2025.1.4.tar.gz -O /opt/rider.tar.gz && \
 
     tar -xf /opt/rider.tar.gz -C /opt && \ 
     rm /opt/rider.tar.gz && \
