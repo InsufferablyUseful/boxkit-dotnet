@@ -1,3 +1,5 @@
 dotnet-sdk-8.0
 libwayland-cursor0
 libxkbcommon0
+libxtst6 
+libglib2.0-bin

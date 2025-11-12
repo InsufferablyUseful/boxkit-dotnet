@@ -1,4 +1,4 @@
-FROM  ghcr.io/insufferablyuseful/boxkit:latest
+FROM  quay.io/toolbx-images/debian-toolbox:12
 
 LABEL com.github.containers.toolbox="true" \
       usage="This image is meant to be used with the toolbox or distrobox command" \
@@ -16,6 +16,8 @@ RUN apt-get update && \
     grep -v '^#' /extra-packages | xargs apt-get -y install
 #Install Rider
 RUN wget https://download.jetbrains.com/rider/JetBrains.Rider-2024.2.5.tar.gz -O /opt/rider.tar.gz && \
+
+
 
     tar -xf /opt/rider.tar.gz -C /opt && \ 
     rm /opt/rider.tar.gz && \
