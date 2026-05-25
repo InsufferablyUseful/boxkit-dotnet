@@ -1,6 +1,6 @@
 #For rider and godot
 dotnet-sdk-8.0
-Rider needs these to start
+#Rider needs these to start
 libwayland-cursor0
 libxkbcommon0
 libxtst6 
