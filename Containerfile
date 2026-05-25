@@ -22,10 +22,9 @@ RUN wget -nv https://download.jetbrains.com/rider/JetBrains.Rider-2026.1.2.tar.g
     mv /opt/*JetBrains\ Rider-* /opt/Rider
 #Install Godot
 RUN wget -nv "https://downloads.godotengine.org/?version=4.6.3&flavor=stable&slug=mono_linux_x86_64.zip&platform=linux.64" -O /opt/godot.zip && \
-    unzip /opt/godot.zip -C /opt && \ 
+    unzip /opt/godot.zip && \ 
     rm /opt/godot.zip && \
     mv /opt/Godot_* /opt/Godot && \
-    cd /opt/Godot && \
     mv /opt/Godot/Godot_* /opt/Godot/godot
 CMD /bin/bash
     
