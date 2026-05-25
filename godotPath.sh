@@ -1,1 +1,1 @@
-PATH="$PATH:/opt/Godot/godot"
+export PATH="$PATH:/opt/Godot/"
