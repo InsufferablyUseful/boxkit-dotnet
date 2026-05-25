@@ -1,5 +1,10 @@
+#For rider and godot
 dotnet-sdk-8.0
+#Rider needs these to start
 libwayland-cursor0
 libxkbcommon0
 libxtst6 
 libglib2.0-bin
+#Godot needs pipewire for audio and libdecor for CSDs
+pipewire
+libdecor-0-0
