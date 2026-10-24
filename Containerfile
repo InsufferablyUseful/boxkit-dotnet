@@ -15,7 +15,7 @@ apt-get update && \
 apt-get -y upgrade && \
 grep -v '^#' /extra-packages | xargs apt-get -y install && \
 wget -nv "https://persistent.oaistatic.com/codex-app-prod/linux/deb/latest/chatgpt_amd64.deb" -O chatgpt_amd64.deb && \
-sudo apt install ./chatgpt_amd64.deb && \
+sudo apt -y install ./chatgpt_amd64.deb && \
 rm chatgpt_amd64.deb && \
 #Install Rider
 wget -nv "https://download.jetbrains.com/rider/JetBrains.Rider-2026.1.2.tar.gz" -O /opt/rider.tar.gz && \
