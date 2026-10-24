@@ -27,7 +27,7 @@ wget -nv "https://downloads.godotengine.org/?version=4.7.1&flavor=stable&slug=mo
     unzip /opt/godot.zip -d /opt && \ 
     rm /opt/godot.zip && \
     mv /opt/Godot_* /opt/Godot && \
-    mv /opt/Godot/Godot_* /opt/Godot/godot && \
+    mv /opt/Godot/Godot_* /opt/Godot/godot 
 
 CMD /bin/bash
     
