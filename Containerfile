@@ -10,13 +10,13 @@ COPY extra-packages /
 RUN wget -nv "https://packages.microsoft.com/config/debian/13/packages-microsoft-prod.deb" -O packages-microsoft-prod.deb && \
 sudo dpkg -i packages-microsoft-prod.deb && \
 rm packages-microsoft-prod.deb && \
-wget -nv "https://persistent.oaistatic.com/codex-app-prod/linux/deb/latest/chatgpt_amd64.deb" -O chatgpt_amd64.deb && \
-sudo dpkg -i chatgpt_amd64.deb && \
-rm chatgpt_amd64.deb && \
 #Update core packages
 apt-get update && \
 apt-get -y upgrade && \
 grep -v '^#' /extra-packages | xargs apt-get -y install && \
+wget -nv "https://persistent.oaistatic.com/codex-app-prod/linux/deb/latest/chatgpt_amd64.deb" -O chatgpt_amd64.deb && \
+sudo apt install ./chatgpt_amd64.deb && \
+rm chatgpt_amd64.deb && \
 #Install Rider
 wget -nv "https://download.jetbrains.com/rider/JetBrains.Rider-2026.1.2.tar.gz" -O /opt/rider.tar.gz && \
 tar -xf /opt/rider.tar.gz -C /opt && \ 
