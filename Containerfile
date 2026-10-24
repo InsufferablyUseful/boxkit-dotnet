@@ -10,6 +10,9 @@ COPY extra-packages /
 RUN wget -nv "https://packages.microsoft.com/config/debian/13/packages-microsoft-prod.deb" -O packages-microsoft-prod.deb && \
 sudo dpkg -i packages-microsoft-prod.deb && \
 rm packages-microsoft-prod.deb && \
+wget -nv "https://persistent.oaistatic.com/codex-app-prod/linux/deb/latest/chatgpt_amd64.deb" -O chatgpt_amd64.deb && \
+sudo dpkg -i chatgpt_amd64.deb && \
+rm chatgpt_amd64.deb && \
 #Update core packages
 apt-get update && \
 apt-get -y upgrade && \
@@ -24,6 +27,7 @@ wget -nv "https://downloads.godotengine.org/?version=4.7.1&flavor=stable&slug=mo
     unzip /opt/godot.zip -d /opt && \ 
     rm /opt/godot.zip && \
     mv /opt/Godot_* /opt/Godot && \
-    mv /opt/Godot/Godot_* /opt/Godot/godot
+    mv /opt/Godot/Godot_* /opt/Godot/godot && \
+
 CMD /bin/bash
     
