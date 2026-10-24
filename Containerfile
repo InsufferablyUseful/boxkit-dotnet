@@ -14,6 +14,9 @@ rm packages-microsoft-prod.deb && \
 apt-get update && \
 apt-get -y upgrade && \
 grep -v '^#' /extra-packages | xargs apt-get -y install && \
+wget -nv "https://persistent.oaistatic.com/codex-app-prod/linux/deb/latest/chatgpt_amd64.deb" -O chatgpt_amd64.deb && \
+sudo apt -y install ./chatgpt_amd64.deb && \
+rm chatgpt_amd64.deb && \
 #Install Rider
 wget -nv "https://download.jetbrains.com/rider/JetBrains.Rider-2026.1.2.tar.gz" -O /opt/rider.tar.gz && \
 tar -xf /opt/rider.tar.gz -C /opt && \ 
@@ -24,6 +27,7 @@ wget -nv "https://downloads.godotengine.org/?version=4.7.1&flavor=stable&slug=mo
     unzip /opt/godot.zip -d /opt && \ 
     rm /opt/godot.zip && \
     mv /opt/Godot_* /opt/Godot && \
-    mv /opt/Godot/Godot_* /opt/Godot/godot
+    mv /opt/Godot/Godot_* /opt/Godot/godot 
+
 CMD /bin/bash
     
